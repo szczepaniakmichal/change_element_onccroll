@@ -1,20 +1,28 @@
+// create and add elements
 const div = document.createElement('div');
 document.body.appendChild(div);
 
+// variables
 let height = 0;
+let width = window.innerWidth;
 const maxHeight = window.innerHeight / 2;
 let flagHeight = true;
-let flagWidth = true;
 
-let width = window.innerWidth;
-const minWidth = window.innerWidth / 2;
-const maxWidth = window.innerWidth;
-
+// styles
 document.body.style.height = '10000px';
-div.style.width = width + 'px';
 div.style.height = height + 'px';
+div.style.width = width + 'px';
 div.style.position = 'fixed';
-const green = div.style.backgroundColor = 'green';
+
+// function
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
 
 const changeHeight = () => {
     if (height >= maxHeight) {
@@ -24,25 +32,18 @@ const changeHeight = () => {
     }
 
     if (flagHeight) {
-        height += 1;
-        div.style.height = height + 'px';
-        width -= 5;
-        div.style.width = width + 'px';
-        div.style.backgroundColor = green;
+        height += 5;
     } else {
-        height -= 1;
-        div.style.height = height + 'px';
-        width += 5;
-        div.style.width = width + 'px';
-        div.style.backgroundColor = 'blue';
+        height -= 5;
     }
 
-    if (width <= minWidth) {
-        flagWidth = !flagWidth;
-    } else if ( width === maxWidth ) {
-        flagWidth = true;
-    }
+    div.style.height = height + 'px';
 
+    if ( height === 0 || height === maxHeight) {
+        div.style.backgroundColor = getRandomColor();
+    }
 };
+
+
 
 window.addEventListener('scroll', changeHeight);

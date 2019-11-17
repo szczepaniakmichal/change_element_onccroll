@@ -14,7 +14,7 @@ div.style.height = height + 'px';
 div.style.width = width + 'px';
 div.style.position = 'fixed';
 
-// function
+// functions
 function getRandomColor() {
     var letters = '0123456789ABCDEF';
     var color = '#';
@@ -25,25 +25,21 @@ function getRandomColor() {
 }
 
 const changeHeight = () => {
-    if (height >= maxHeight) {
+    if (height >= maxHeight || height < 0) {
         flagHeight = !flagHeight;
-    } else if (height === 0) {
-        flagHeight = true;
     }
 
     if (flagHeight) {
-        height += 5;
+        height += 1;
     } else {
-        height -= 5;
+        height -= 1;
     }
 
     div.style.height = height + 'px';
 
-    if ( height === 0 || height === maxHeight) {
+    if (height === 0 || height === maxHeight) {
         div.style.backgroundColor = getRandomColor();
     }
 };
-
-
 
 window.addEventListener('scroll', changeHeight);
